@@ -1,0 +1,80 @@
+# This is the default .slate file.
+# If no ~/.slate file exists this is the file that will be used.
+# Configs
+config defaultToCurrentScreen true
+config nudgePercentOf         screenSize
+config resizePercentOf        screenSize
+
+# Monitor Aliases
+alias mon-laptop      1280x800
+alias mon-external    1920x1080
+
+# Position Aliases
+#alias 1-chat corner top-right move screenOriginX+1064;screenOriginY+0 ${mon-laptop}
+alias 1-chat          corner top-right                  resize:screenSizeX/6;screenSizeY  ${mon-laptop} 
+alias 1-chat-convos   move 467;0                        screenSizeX/4;screenSizeY         ${mon-laptop} 
+alias 1-top-left      move screenOriginX;screenOriginY  screenSizeX;screenSizeY           ${mon-laptop}
+alias 1-left          move screenOriginX;screenOriginY  398;screenSizeY                   $(mon-laptop}
+
+alias 2-chat          corner top-right                  resize:screenSizeX/8;screenSizeY  ${mon-external} 
+alias 2-chat-convos   move 914;0                        screenSizeX/2.5;screenSizeY/1.5     ${mon-external} 
+alias 2-left          move screenOriginX;screenOriginY  398;screenSizeY                   $(mon-external}
+alias 2-mid           move 396;1057                     1280;1058                         ${mon-external}
+
+#Default Layouts
+default 1monitor      resolutions:${mon-laptop}
+default 1extmonitor   resolutions:${mon-external}
+
+# 1 monitor layout
+layout 1monitor 'Messages':IGNORE_FAIL,TITLE_ORDER=jonezy.org ${1-chat} | ${1-chat-convos}
+layout 1monitor 'Google Chrome':IGNORE_FAIL ${1-top-left}
+layout 1monitor 'Tweetbot':IGNORE_FAIL ${1-left}
+
+layout 1extmonitor 'Messages':IGNORE_FAIL,TITLE_ORDER=jonezy.org ${2-chat} | ${2-chat-convos}
+layout 1extmonitor 'Tweetbot':IGNORE_FAIL ${2-left}
+layout 1monitor 'Google Chrome':IGNORE_FAIL ${2-mid}
+
+# Resize Bindings
+bind l:alt       resize +1%   +0
+bind h:alt       resize -1%   +0
+bind k:alt       resize +0    -1%
+bind j:alt       resize +0    +1%
+bind l:ctrl;alt  resize -10%  +0    bottom-right
+bind h:ctrl;alt  resize +10%  +0    bottom-right
+bind k:ctrl;alt  resize +0    +10%  bottom-right
+bind j:ctrl;alt  resize +0    -10%  bottom-right
+
+# Push Bindings
+bind l:ctrl;cmd   push right bar-resize:screenSizeX/1.7
+bind h:ctrl;cmd   push left  bar-resize:screenSizeX/1.7
+bind k:ctrl;cmd   push up    bar-resize:screenSizeY/2
+bind j:ctrl;cmd   push down  bar-resize:screenSizeY/2
+bind 0:ctrl;cmd   push up    bar-resize:screenSizeX screenSizeY
+
+# Nudge Bindings
+bind l:shift;alt  nudge +1% +0
+bind h:shift;alt  nudge -1% +0
+bind k:shift;alt  nudge +0  -1%
+bind j:shift;alt  nudge +0  +1%
+
+# Throw Bindings
+bind 1:ctrl;cmd         throw 0
+bind 2:ctrl;cmd         throw 1
+bind 3:ctrl;cmd         throw 2
+bind l:ctrl;alt;cmd     throw right resize
+bind h:ctrl;alt;cmd     throw left  resize
+bind k:ctrl;alt;cmd     throw up    resize
+bind j:ctrl;alt;cmd     throw down  resize
+
+# Layout Bindings
+bind 1:ctrl;alt;cmd layout 1monitor
+bind 2:ctrl;alt;cmd layout 1extmonitor
+
+# Window Hints
+bind esc:alt hint
+
+# Grid
+bind esc:ctrl grid
+
+#Relacunch
+bind esc:ctrl;alt relaunch
