@@ -38,6 +38,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Show status bar in Finder
 defaults write com.apple.finder ShowStatusBar -bool true
 
+# Show ALL Files in finder.
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
 # Allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
