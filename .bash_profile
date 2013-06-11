@@ -74,4 +74,4 @@ git branch --no-color 2> /dev/null | statused -e '/^[^*]/d' -e "s/* \(.*\)/\1$(p
 
     #PS1="\w \$(parse_git_branch_or_tag) $ "
 
-
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
