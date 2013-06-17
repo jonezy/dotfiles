@@ -1,5 +1,7 @@
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+bind 'set completion-ignore-case on'
+
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
