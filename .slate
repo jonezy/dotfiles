@@ -26,11 +26,11 @@ default 1monitor      resolutions:${mon-laptop}
 default 1extmonitor   resolutions:${mon-external}
 
 # 1 monitor layout
-layout 1monitor 'Messages':IGNORE_FAIL,TITLE_ORDER=jonezy.org ${1-chat} | ${1-chat-convos}
+layout 1monitor 'Messages':IGNORE_FAIL,TITLE_ORDER=Jonezy ${1-chat} | ${1-chat-convos}
 layout 1monitor 'Google Chrome':IGNORE_FAIL ${1-top-left}
 layout 1monitor 'Tweetbot':IGNORE_FAIL ${1-left}
 
-layout 1extmonitor 'Messages':IGNORE_FAIL,TITLE_ORDER=jonezy.org ${2-chat} | ${2-chat-convos}
+layout 1extmonitor 'Messages':IGNORE_FAIL,TITLE_ORDER=Jonezy ${2-chat} | ${2-chat-convos}
 layout 1extmonitor 'Tweetbot':IGNORE_FAIL ${2-left}
 layout 1monitor 'Google Chrome':IGNORE_FAIL ${2-mid}
 
