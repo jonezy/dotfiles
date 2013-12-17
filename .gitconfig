@@ -3,6 +3,7 @@
   email = chris@jonezy.org
 [core]
   editor = /usr/bin/vim
+	trustctime = false
 [alias]
   st = status -sb
   ci = commit
