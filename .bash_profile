@@ -55,7 +55,7 @@ function parse_git_branch() {
 git branch --no-color 2> /dev/null | statused -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-    export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[${BOLD}${MAGENTA}\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
+    export PS1="\[${BOLD}${MAGENTA}\]\u \[$PURPLE\]at \[$MAGENTA\]\h \[$PURPLE\]in \[${BOLD}${MAGENTA}\]\w\[$PURPLE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$MAGENTA\]\n\$ \[$RESET\]"
     export PS2="\[$ORANGE\]→ \[$RESET\]"
 
     parse_git_branch () {
