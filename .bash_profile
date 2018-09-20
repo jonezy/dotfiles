@@ -1,6 +1,15 @@
+export PATH=~/.local/bin:$PATH
 alias ll="ls -la"
 alias ios="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
 alias pys="python -m SimpleHTTPServer"
+alias v="vagrant"
+
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
+
+export MONO_MANAGED_WATCHER=false
+
+source dnvm.sh
 
 # @gf3’s Sexy Bash Prompt, inspired by “Extravagant Zsh Prompt”
 # Shamelessly copied from https://github.com/gf3/dotfiles
@@ -52,28 +61,40 @@ function parse_git_dirty() {
 }
 
 function parse_git_branch() {
-git branch --no-color 2> /dev/null | statused -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+  git branch --no-color 2> /dev/null | statused -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-    export PS1="\[${BOLD}${MAGENTA}\]\u \[$PURPLE\]at \[$MAGENTA\]\h \[$PURPLE\]in \[${BOLD}${MAGENTA}\]\w\[$PURPLE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$MAGENTA\]\n\$ \[$RESET\]"
-    export PS2="\[$ORANGE\]→ \[$RESET\]"
+export PS1="\[${BOLD}${MAGENTA}\]\u \[$PURPLE\]at \[$MAGENTA\]\h \[$PURPLE\]in \[${BOLD}${MAGENTA}\]\w\[$PURPLE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$MAGENTA\]\n\$ \[$RESET\]"
+export PS2="\[$ORANGE\]→ \[$RESET\]"
 
-    parse_git_branch () {
-      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-    }
+parse_git_branch () {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 
-    parse_git_tag () {
-      git describe --tags 2> /dev/null
-    }
+parse_git_tag () {
+  git describe --tags 2> /dev/null
+}
 
-    parse_git_branch_or_tag() {
-      local OUT="$(parse_git_branch)"
-      if [ "$OUT" == " ((no branch))" ]; then
-        OUT="($(parse_git_tag))";
-      fi
-      echo $OUT
-    }
+parse_git_branch_or_tag() {
+  local OUT="$(parse_git_branch)"
+  if [ "$OUT" == " ((no branch))" ]; then
+    OUT="($(parse_git_tag))";
+  fi
+  echo $OUT
+}
 
-    #PS1="\w \$(parse_git_branch_or_tag) $ "
+#PS1="\w \$(parse_git_branch_or_tag) $ "
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+code () {
+  if [[ $# = 0 ]]
+  then
+    open -a "Visual Studio Code"
+  else
+    [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+    open -a "Visual Studio Code" --args "$F"
+  fi
+}
+
+
